@@ -488,7 +488,8 @@
       background:linear-gradient(to top, rgba(13,13,13,0.98) 0%, rgba(13,13,13,0.8) 34%, rgba(13,13,13,0.28) 62%, transparent 82%);
     }
 
-    body.menu-open{ overflow:hidden; }
+    html.menu-open{ overflow:hidden; }
+    html.menu-open #navbar{ background:#0D0D0D; border-color:#2A2A2A; }
 
     #mobileMenuBackdrop{
       position:fixed;
@@ -501,14 +502,15 @@
 
     #mobileMenu{
       position:fixed;
-      top:76px;
+      top:85px;
       left:0;
       right:0;
       bottom:0;
       overflow-y:auto;
+      overscroll-behavior:contain;
       z-index:70;
       padding:1.1rem 1.3rem calc(1.4rem + env(safe-area-inset-bottom));
-      border-top:1px solid #2A2A2A;
+      border-top:0;
     }
     #mobileMenu .nav-link{
       display:block;
@@ -516,6 +518,7 @@
       font-size:.86rem;
       border-bottom:1px solid #232323;
     }
+    #mobileMenu .nav-link::after{ bottom:-1px; }
     #mobileMenu .btn{
       width:100%;
       justify-content:center;
@@ -642,7 +645,7 @@
 
 
 
-    <button id="menuBtn" class="md:hidden text-white" aria-label="Abrir menu">
+    <button id="menuBtn" type="button" class="md:hidden text-white w-11 h-11 -mr-2 flex items-center justify-center" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
 
       <i data-lucide="menu" class="w-6 h-6"></i>
 
@@ -650,27 +653,27 @@
 
   </div>
 
-
-
-  <!-- mobile menu -->
-
-  <div id="mobileMenu" class="md:hidden hidden flex-col border-t border-hair px-6 py-6 gap-5" style="background-color:#0D0D0D;">
-
-    <a href="#inicio" class="nav-link">Início</a>
-
-    <a href="#sobre" class="nav-link">Sobre</a>
-
-    <a href="#portfolio" class="nav-link">Portfólio</a>
-
-    <a href="#servicos" class="nav-link">Serviços</a>
-
-    <a href="#contato" class="nav-link">Contato</a>
-
-    <a href="#contato" class="btn btn-primary justify-center mt-2">Fale Comigo</a>
-
-  </div>
-
 </nav>
+
+<!-- mobile menu: fica fora do <nav> porque o backdrop-filter da navbar quebraria o position:fixed -->
+
+<div id="mobileMenu" class="md:hidden hidden flex-col border-t border-hair px-6 py-6 gap-5" style="background-color:#0D0D0D;">
+
+  <a href="#inicio" class="nav-link">Início</a>
+
+  <a href="#sobre" class="nav-link">Sobre</a>
+
+  <a href="#portfolio" class="nav-link">Portfólio</a>
+
+  <a href="#servicos" class="nav-link">Serviços</a>
+
+  <a href="#contato" class="nav-link">Contato</a>
+
+  <a href="#contato" class="btn btn-primary justify-center mt-2">Fale Comigo</a>
+
+  <a href="tel:+5567996703055" class="flex items-center justify-center gap-3 py-2 text-sm text-fog hover:text-brass transition-colors"><i data-lucide="phone" class="w-4 h-4 text-brass"></i>(67) 99670-3055</a>
+
+</div>
 
 <div id="mobileMenuBackdrop" class="hidden md:hidden"></div>
 
@@ -731,13 +734,15 @@
 
 
 
-      <div class="mt-16 flex items-center gap-5">
+      <div class="mt-16 flex flex-wrap items-center gap-5">
 
         <a href="https://www.instagram.com/nandonantes?igsh=ajhzMGx5Mng1dTJz&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full border border-hair flex items-center justify-center hover:border-brass hover:text-brass transition-colors"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M7.03 2h9.94A5.03 5.03 0 0 1 22 7.03v9.94A5.03 5.03 0 0 1 16.97 22H7.03A5.03 5.03 0 0 1 2 16.97V7.03A5.03 5.03 0 0 1 7.03 2Zm0 2A3.03 3.03 0 0 0 4 7.03v9.94A3.03 3.03 0 0 0 7.03 20h9.94A3.03 3.03 0 0 0 20 16.97V7.03A3.03 3.03 0 0 0 16.97 4H7.03Zm9.87 1.52a1.18 1.18 0 1 1 0 2.36 1.18 1.18 0 0 1 0-2.36ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></a>
 
         <a href="mailto:nantesfernando35@gmail.com" aria-label="E-mail" class="w-10 h-10 rounded-full border border-hair flex items-center justify-center hover:border-brass hover:text-brass transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
 
         <a href="https://wa.me/5567996703055" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-hair flex items-center justify-center hover:border-brass hover:text-brass transition-colors"><i data-lucide="phone" class="w-4 h-4"></i></a>
+
+        <a href="tel:+5567996703055" class="text-sm text-fog whitespace-nowrap hover:text-brass transition-colors">(67) 99670-3055</a>
 
       </div>
 
@@ -1036,6 +1041,8 @@
 
     <a href="#contato" class="btn btn-primary">Fale Comigo <i data-lucide="message-circle" class="w-4 h-4"></i></a>
 
+    <p class="mt-6 text-sm text-fog font-light">ou ligue: <a href="tel:+5567996703055" class="text-white font-medium whitespace-nowrap hover:text-brass transition-colors">(67) 99670-3055</a></p>
+
   </div>
 
 </section>
@@ -1062,7 +1069,7 @@
 
       <div class="space-y-5 text-sm">
 
-        <div class="flex items-center gap-4"><i data-lucide="phone" class="w-4 h-4 text-brass"></i><span class="text-fog">(67) 99670-3055</span></div>
+        <div class="flex items-center gap-4"><i data-lucide="phone" class="w-4 h-4 text-brass"></i><a class="text-fog hover:text-brass transition-colors" href="tel:+5567996703055">(67) 99670-3055</a></div>
 
         <div class="flex items-center gap-4"><i data-lucide="instagram" class="w-4 h-4 text-brass"></i><a class="text-fog hover:text-brass transition-colors" href="https://www.instagram.com/nandonantes?igsh=ajhzMGx5Mng1dTJz&utm_source=qr" target="_blank" rel="noopener noreferrer">@nandonantes</a></div>
 
@@ -1166,7 +1173,7 @@
 
       <ul class="space-y-3 text-sm text-smoke font-light mb-6">
 
-        <li>(67) 99670-3055</li>
+        <li><a href="tel:+5567996703055" class="hover:text-brass transition-colors">(67) 99670-3055</a></li>
 
         <li>nantesfernando35@gmail.com</li>
 
@@ -1945,8 +1952,10 @@ function setMobileMenu(open){
   mobileMenu.classList.toggle('flex', open);
   mobileMenuBackdrop.classList.toggle('open', open);
   mobileMenuBackdrop.classList.toggle('hidden', !open);
-  document.body.classList.toggle('menu-open', open);
+  if (open) mobileMenu.style.top = navbar.offsetHeight + 'px';
+  document.documentElement.classList.toggle('menu-open', open);
   menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
   menuBtn.innerHTML = open ? '<i data-lucide="x" class="w-6 h-6"></i>' : '<i data-lucide="menu" class="w-6 h-6"></i>';
   lucide.createIcons();
 }
